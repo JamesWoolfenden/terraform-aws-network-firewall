@@ -4,4 +4,3 @@ module "firewall" {
   subnet_id   = "subnet-0fe60b8a890561d2d"
   common_tags = var.common_tags
 }
-

@@ -57,35 +57,26 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_network-firewall_cluster.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network-firewall_cluster) | resource |
-| [aws_network-firewall_cluster_instance.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network-firewall_cluster_instance) | resource |
-| [aws_network-firewall_parameter_group.examplea](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network-firewall_parameter_group) | resource |
-| [aws_network-firewall_subnet_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network-firewall_subnet_group) | resource |
-| [aws_security_group.network-firewall](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
+| [aws_networkfirewall_firewall.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall) | resource |
+| [aws_networkfirewall_firewall_policy.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall_policy) | resource |
+| [aws_networkfirewall_logging_configuration.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_logging_configuration) | resource |
+| [aws_networkfirewall_rule_group.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_rule_group) | resource |
+| [aws_s3_bucket.firewall_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_public_access_block.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allowed_range"></a> [allowed\_range](#input\_allowed\_range) | Cidrs that are allowed into network-firewall | `list(any)` | n/a | yes |
-| <a name="input_cluster"></a> [cluster](#input\_cluster) | network-firewall Cluster data | `map(any)` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | This is to help you add tags to your cloud objects | `map(any)` | n/a | yes |
-| <a name="input_identifier"></a> [identifier](#input\_identifier) | (optional) describe your variable | `string` | `"example-a"` | no |
-| <a name="input_instance"></a> [instance](#input\_instance) | n/a | `map(any)` | <pre>{<br>  "apply_immediately": true,<br>  "count": 2,<br>  "engine": "network-firewall",<br>  "instance_class": "db.r4.large"<br>}</pre> | no |
-| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | n/a | `string` | n/a | yes |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC | `list(any)` | `[]` | no |
-| <a name="input_subnet_group_name"></a> [subnet\_group\_name](#input\_subnet\_group\_name) | n/a | `string` | `"main"` | no |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | n/a | `list(any)` | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | Security Group needs to know where to ne made | `string` | n/a | yes |
+| <a name="input_firewall"></a> [firewall](#input\_firewall) | n/a | <pre>object({<br>    name                     = string<br>    description              = string<br>    delete_protection        = bool<br>    subnet_change_protection = bool<br>  })</pre> | <pre>{<br>  "delete_protection": false,<br>  "description": "a firewall",<br>  "name": "example",<br>  "subnet_change_protection": false<br>}</pre> | no |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | n/a | `string` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_cluster"></a> [cluster](#output\_cluster) | n/a |
-| <a name="output_instances"></a> [instances](#output\_instances) | n/a |
-| <a name="output_subnet"></a> [subnet](#output\_subnet) | n/a |
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Related Projects
