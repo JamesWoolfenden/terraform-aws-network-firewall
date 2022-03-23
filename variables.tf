@@ -28,3 +28,5 @@ variable "subnet_id" {
 variable "vpc_id" {
   type = string
 }
+
+variable "kms_key" {}
