@@ -7,8 +7,11 @@ resource "aws_networkfirewall_firewall" "example" {
 
   subnet_change_protection = var.firewall["subnet_change_protection"]
 
-  subnet_mapping {
-    subnet_id = var.subnet_id
+  dynamic "subnet_mapping" {
+    for_each = var.subnets
+    content {
+      subnet_id = subnet_mapping.value
+    }
   }
 
 }

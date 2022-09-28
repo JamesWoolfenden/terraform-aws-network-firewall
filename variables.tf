@@ -1,7 +1,3 @@
-variable "common_tags" {
-  description = "This is to help you add tags to your cloud objects"
-  type        = map(any)
-}
 
 variable "firewall" {
   type = object({
@@ -21,8 +17,8 @@ variable "firewall" {
   }
 }
 
-variable "subnet_id" {
-  type = string
+variable "subnets" {
+  type = list(string)
 }
 
 variable "vpc_id" {
@@ -30,3 +26,25 @@ variable "vpc_id" {
 }
 
 variable "kms_key" {}
+
+variable "tags" {
+  type = map(any)
+}
+
+
+variable "rule_group" {
+  type = object({
+    capacity = number
+    name     = string
+    type     = string
+  })
+}
+
+variable "source_list" {
+  type = list(object({
+    generated_rules_type = string
+    target_types         = list(string)
+    targets              = list(string)
+  }))
+
+}

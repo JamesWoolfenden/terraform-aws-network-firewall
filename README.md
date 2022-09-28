@@ -32,8 +32,26 @@ Include **module.network-firewall.tf** this repository as a module in your exist
 module "network-firewall" {
   source        = "JamesWoolfenden/network-firewall/aws"
   version       = "0.0.1"
-  vpc_id        = "vpc-00000000000"
-  subnet_id     = "subnet-00000000000"
+  vpc_id  = "vpc-0e204c74343e44b95"
+  subnets = ["subnet-0fe60b8a890561d2d"]
+  rule_group = {
+    capacity = 100
+    name     = "pike"
+    type     = "STATEFUL"
+  }
+  kms_key = aws_kms_key.example
+  source_list = [{
+    generated_rules_type = "DENYLIST"
+    target_types         = ["HTTP_HOST"]
+    targets              = ["test.pike.com"]
+  }]
+
+  log_destination = {
+    bucketName           = module.firewall.bucketName
+    log_destination_type = "S3"
+    log_type             = "FLOW"
+    prefix               = "/example"
+  }
 }
 ```
 
@@ -69,15 +87,20 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | This is to help you add tags to your cloud objects | `map(any)` | n/a | yes |
 | <a name="input_firewall"></a> [firewall](#input\_firewall) | n/a | <pre>object({<br>    name                     = string<br>    description              = string<br>    delete_protection        = bool<br>    subnet_change_protection = bool<br>  })</pre> | <pre>{<br>  "delete_protection": false,<br>  "description": "a firewall",<br>  "name": "example",<br>  "subnet_change_protection": false<br>}</pre> | no |
 | <a name="input_kms_key"></a> [kms\_key](#input\_kms\_key) | n/a | `any` | n/a | yes |
-| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | n/a | `string` | n/a | yes |
+| <a name="input_log_destination"></a> [log\_destination](#input\_log\_destination) | n/a | <pre>object({<br>    bucketName           = string<br>    prefix               = string<br>    log_destination_type = string<br>    log_type             = string<br>  })</pre> | n/a | yes |
+| <a name="input_rule_group"></a> [rule\_group](#input\_rule\_group) | n/a | <pre>object({<br>    capacity = number<br>    name     = string<br>    type     = string<br>  })</pre> | n/a | yes |
+| <a name="input_source_list"></a> [source\_list](#input\_source\_list) | n/a | <pre>list(object({<br>    generated_rules_type = string<br>    target_types         = list(string)<br>    targets              = list(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_subnets"></a> [subnets](#input\_subnets) | n/a | `list(string)` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_bucketName"></a> [bucketName](#output\_bucketName) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Policy
@@ -98,6 +121,66 @@ resource "aws_iam_policy" "terraform_pike" {
     "Statement": [
         {
             "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateVpcEndpoint",
+                "ec2:DeleteVpcEndpoints",
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogDelivery",
+                "logs:DeleteLogDelivery",
+                "logs:GetLogDelivery",
+                "logs:ListLogDeliveries"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": [
+                "network-firewall:AssociateFirewallPolicy",
+                "network-firewall:CreateFirewall",
+                "network-firewall:CreateFirewallPolicy",
+                "network-firewall:CreateRuleGroup",
+                "network-firewall:DeleteFirewall",
+                "network-firewall:DeleteFirewallPolicy",
+                "network-firewall:DeleteRuleGroup",
+                "network-firewall:DescribeFirewall",
+                "network-firewall:DescribeFirewallPolicy",
+                "network-firewall:DescribeLoggingConfiguration",
+                "network-firewall:DescribeRuleGroup",
+                "network-firewall:ListRuleGroups",
+                "network-firewall:TagResource",
+                "network-firewall:UntagResource",
+                "network-firewall:UpdateFirewallDeleteProtection",
+                "network-firewall:UpdateFirewallDescription",
+                "network-firewall:UpdateFirewallPolicy",
+                "network-firewall:UpdateLoggingConfiguration",
+                "network-firewall:UpdateRuleGroup",
+                "network-firewall:UpdateSubnetChangeProtection"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor4",
             "Effect": "Allow",
             "Action": [
                 "s3:CreateBucket",

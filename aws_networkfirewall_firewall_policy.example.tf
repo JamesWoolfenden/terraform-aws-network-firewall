@@ -1,5 +1,5 @@
 resource "aws_networkfirewall_firewall_policy" "example" {
-  name = "example"
+  name = var.firewall.name
 
   firewall_policy {
     stateless_default_actions          = ["aws:pass"]
