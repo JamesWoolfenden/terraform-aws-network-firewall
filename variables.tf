@@ -1,4 +1,3 @@
-
 variable "firewall" {
   type = object({
     name                     = string
@@ -16,22 +15,16 @@ variable "firewall" {
     subnet_change_protection = false //defaults to false
   }
 }
-
 variable "subnets" {
   type = list(string)
 }
-
 variable "vpc_id" {
   type = string
 }
-
 variable "kms_key" {}
-
 variable "tags" {
   type = map(any)
 }
-
-
 variable "rule_group" {
   type = object({
     capacity = number
@@ -39,7 +32,6 @@ variable "rule_group" {
     type     = string
   })
 }
-
 variable "source_list" {
   type = list(object({
     generated_rules_type = string

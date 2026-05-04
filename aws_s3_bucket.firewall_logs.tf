@@ -9,7 +9,6 @@ resource "aws_s3_bucket" "firewall_logs" {
 
   bucket = "firewall_logs_${data.aws_caller_identity.current.account_id}"
 }
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "firewall_logs" {
   bucket = aws_s3_bucket.firewall_logs.bucket
 
@@ -20,10 +19,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "firewall_logs" {
     }
   }
 }
-
-
 data "aws_caller_identity" "current" {}
-
 resource "aws_s3_bucket_public_access_block" "example" {
   bucket                  = aws_s3_bucket.firewall_logs.id
   restrict_public_buckets = true

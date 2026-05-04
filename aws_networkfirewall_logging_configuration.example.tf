@@ -11,7 +11,6 @@ resource "aws_networkfirewall_logging_configuration" "example" {
     }
   }
 }
-
 variable "log_destination" {
   type = object({
     bucketName           = string
