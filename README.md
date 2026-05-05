@@ -129,9 +129,12 @@ resource "aws_iam_policy" "terraform_pike" {
                 "ec2:DescribeRouteTables",
                 "ec2:DescribeSubnets",
                 "ec2:DescribeVpcEndpoints",
-                "ec2:DescribeVpcs"
+                "ec2:DescribeVpcs",
+                "ec2:GetManagedPrefixListEntries"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         },
         {
             "Sid": "VisualEditor1",
@@ -139,7 +142,9 @@ resource "aws_iam_policy" "terraform_pike" {
             "Action": [
                 "iam:CreateServiceLinkedRole"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         },
         {
             "Sid": "VisualEditor2",
@@ -150,13 +155,16 @@ resource "aws_iam_policy" "terraform_pike" {
                 "logs:GetLogDelivery",
                 "logs:ListLogDeliveries"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         },
         {
             "Sid": "VisualEditor3",
             "Effect": "Allow",
             "Action": [
                 "network-firewall:AssociateFirewallPolicy",
+                "network-firewall:AssociateSubnets",
                 "network-firewall:CreateFirewall",
                 "network-firewall:CreateFirewallPolicy",
                 "network-firewall:CreateRuleGroup",
@@ -170,6 +178,7 @@ resource "aws_iam_policy" "terraform_pike" {
                 "network-firewall:ListRuleGroups",
                 "network-firewall:TagResource",
                 "network-firewall:UntagResource",
+                "network-firewall:UpdateFirewallAnalysisSettings",
                 "network-firewall:UpdateFirewallDeleteProtection",
                 "network-firewall:UpdateFirewallDescription",
                 "network-firewall:UpdateFirewallPolicy",
@@ -177,7 +186,9 @@ resource "aws_iam_policy" "terraform_pike" {
                 "network-firewall:UpdateRuleGroup",
                 "network-firewall:UpdateSubnetChangeProtection"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         },
         {
             "Sid": "VisualEditor4",
@@ -205,7 +216,9 @@ resource "aws_iam_policy" "terraform_pike" {
                 "s3:PutBucketPublicAccessBlock",
                 "s3:PutEncryptionConfiguration"
             ],
-            "Resource": "*"
+            "Resource": [
+                "*"
+            ]
         }
     ]
 })
