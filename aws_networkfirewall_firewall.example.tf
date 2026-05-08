@@ -5,6 +5,11 @@ resource "aws_networkfirewall_firewall" "example" {
   firewall_policy_arn = aws_networkfirewall_firewall_policy.example.arn
   vpc_id              = var.vpc_id
 
+  encryption_configuration {
+    key_id = var.kms_key.arn
+    type   = "CUSTOMER_KMS"
+  }
+
   subnet_change_protection = var.firewall["subnet_change_protection"]
 
   dynamic "subnet_mapping" {

@@ -2,6 +2,10 @@ resource "aws_networkfirewall_rule_group" "example" {
   capacity = var.rule_group.capacity
   name     = var.rule_group.name
   type     = var.rule_group.type
+  encryption_configuration {
+    key_id = var.kms_key.arn
+    type   = "CUSTOMER_KMS"
+  }
   rule_group {
     rules_source {
       dynamic "rules_source_list" {

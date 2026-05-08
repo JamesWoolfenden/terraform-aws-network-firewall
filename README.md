@@ -1,13 +1,11 @@
 # terraform-aws-network-firewall
 
-[![Build Status](https://github.com/JamesWoolfenden/terraform-aws-network-firewall/workflows/Verify%20and%20Bump/badge.svg?branch=main)](https://github.com/JamesWoolfenden/terraform-aws-network-firewall)
+[![Build Status](https://github.com/JamesWoolfenden/terraform-aws-network-firewall/workflows/Verify/badge.svg?branch=main)](https://github.com/JamesWoolfenden/terraform-aws-network-firewall)
 [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/terraform-aws-network-firewall.svg)](https://github.com/JamesWoolfenden/terraform-aws-network-firewall/releases/latest)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/JamesWoolfenden/terraform-aws-network-firewall.svg?label=latest)](https://github.com/JamesWoolfenden/terraform-aws-network-firewall/releases/latest)
 ![Terraform Version](https://img.shields.io/badge/tf-%3E%3D0.14.0-blue.svg)
-[![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/JamesWoolfenden/terraform-aws-network-firewall/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=JamesWoolfenden%2Fterraform-aws-network-firewall&benchmark=CIS+AWS+V1.2)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![checkov](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
-[![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/jameswoolfenden/terraform-aws-network-firewall/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=JamesWoolfenden%2Fterraform-aws-network-firewall&benchmark=INFRASTRUCTURE+SECURITY)
 
 Terraform module -
 
@@ -63,7 +61,7 @@ No requirements.
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
@@ -73,7 +71,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_networkfirewall_firewall.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall) | resource |
 | [aws_networkfirewall_firewall_policy.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall_policy) | resource |
 | [aws_networkfirewall_logging_configuration.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_logging_configuration) | resource |
@@ -86,12 +84,12 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_firewall"></a> [firewall](#input\_firewall) | n/a | <pre>object({<br>    name                     = string<br>    description              = string<br>    delete_protection        = bool<br>    subnet_change_protection = bool<br>  })</pre> | <pre>{<br>  "delete_protection": false,<br>  "description": "a firewall",<br>  "name": "example",<br>  "subnet_change_protection": false<br>}</pre> | no |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_firewall"></a> [firewall](#input\_firewall) | n/a | <pre>object({<br/>    name                     = string<br/>    description              = string<br/>    delete_protection        = bool<br/>    subnet_change_protection = bool<br/>  })</pre> | <pre>{<br/>  "delete_protection": false,<br/>  "description": "a firewall",<br/>  "name": "example",<br/>  "subnet_change_protection": false<br/>}</pre> | no |
 | <a name="input_kms_key"></a> [kms\_key](#input\_kms\_key) | n/a | `any` | n/a | yes |
-| <a name="input_log_destination"></a> [log\_destination](#input\_log\_destination) | n/a | <pre>object({<br>    bucketName           = string<br>    prefix               = string<br>    log_destination_type = string<br>    log_type             = string<br>  })</pre> | n/a | yes |
-| <a name="input_rule_group"></a> [rule\_group](#input\_rule\_group) | n/a | <pre>object({<br>    capacity = number<br>    name     = string<br>    type     = string<br>  })</pre> | n/a | yes |
-| <a name="input_source_list"></a> [source\_list](#input\_source\_list) | n/a | <pre>list(object({<br>    generated_rules_type = string<br>    target_types         = list(string)<br>    targets              = list(string)<br>  }))</pre> | n/a | yes |
+| <a name="input_log_destination"></a> [log\_destination](#input\_log\_destination) | n/a | <pre>object({<br/>    bucketName           = string<br/>    prefix               = string<br/>    log_destination_type = string<br/>    log_type             = string<br/>  })</pre> | n/a | yes |
+| <a name="input_rule_group"></a> [rule\_group](#input\_rule\_group) | n/a | <pre>object({<br/>    capacity = number<br/>    name     = string<br/>    type     = string<br/>  })</pre> | n/a | yes |
+| <a name="input_source_list"></a> [source\_list](#input\_source\_list) | n/a | <pre>list(object({<br/>    generated_rules_type = string<br/>    target_types         = list(string)<br/>    targets              = list(string)<br/>  }))</pre> | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | n/a | `list(string)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
@@ -99,7 +97,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_bucketName"></a> [bucketName](#output\_bucketName) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
